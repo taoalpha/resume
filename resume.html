@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.10.10/sass.sync.min.js"></script>
+    <script>
+        var scss = `
+        @font-face {
+	        font-family: 'TrajanPro-Regular';
+	        src: url('TrajanPro-Regular.woff') format('woff');
+        }
+        $font: 'TrajanPro-Regular', serif;
+        $openfont: 'Open Sans', sans-serif;
+        $rfont: 'Roboto', sans-serif;
+        body {
+            padding-left: 5px;
+            * {
+                font-family: 'Open Sans', sans-serif;
+            }
+            a:visited {
+                color: black;
+            }
+        }
+        header {
+            display: flex;
+            padding: 10px 0px 0px;
+            .name {
+                flex: 2;
+                float: left;
+                h1 {
+                    font-size: 2.5rem;
+                    text-transform: uppercase;
+                }
+                h2 {
+                    padding: 20px 0px 10px;
+                    font-size: 1rem;
+                    font-weight: 100;
+                    font-style: italic;
+                    span {
+                        &:before {
+                            content: " • "
+                        }
+                    }
+                }
+            }
+            .contact {
+                flex: 0 0 220px;
+                * {
+                    opacity: 0.9;
+                }
+                li {
+                    padding: 5px 10px;
+                    font-family: $rfont;
+                    font-size: 0.8rem;
+                    i {
+                        padding-right: 5px;
+                    }
+                    a {
+                        text-decoration: none;
+                        color: black;
+                        font-family: $rfont;
+                    }
+                }
+            }
+        }
+
+        .content {
+            h2 {
+                font-family: $font;
+                font-weight: lighter;
+                opacity: 0.9;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                padding: 10px 0px;
+            }
+            ul {
+                margin-left: 5px;
+                position: relative;
+                border-left: 1px solid black;
+                li {
+                    position: relative;
+                    padding: 0px 20px 5px;
+                    &:before {
+                        display: block;
+                        position: absolute;
+                        left: -8px;
+                        content: "";
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 7px;
+                        border: 1px solid black;
+                        background-color: white;
+                    }
+
+                    &:nth-last-child(1):after{
+                        display: block;
+                        position: absolute;
+                        width: 2px;
+                        height: 100%;
+                        background-color: white;
+                        left: -2px;
+                        top: 16.1px;
+                        content: "";
+                    }
+
+                    h3 {
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        opacity: 0.7;
+                        span {
+                            float: right;
+                            font-size: 1rem;
+                            font-style: italic;
+                            font-weight: lighter;
+                            opacity: 0.5;
+                        }
+                    }
+                    > p {
+                        font-size: 0.8rem;
+                        font-family: $rfont;
+                        white-space: pre-line;
+                        line-height: 16px;
+                        strong {
+                            font-weight: bold;
+                            opacity: 0.7;
+                            font-family: $openfont;
+                        }
+                    }
+                    > p:nth-child(2n) {
+                        padding: 5px 0px;
+                    }
+                    > p:nth-last-child(1) {
+                        padding-bottom: 5px;
+                    }
+                }
+            }
+        }
+
+        `;
+        Sass.compile(scss, (result) => {
+            let head = document.head || document.getElementsByTagName('head')[0],
+                style = document.createElement('style');
+
+            style.type = 'text/css';
+            if (style.styleSheet) {
+                // This is required for IE8 and below.
+                style.styleSheet.cssText = result.text;
+            } else {
+                style.appendChild(document.createTextNode(result.text));
+            }
+            head.appendChild(style);
+        });
+    </script>
+    <script src="./resume.js"></script>
+    <title>Resume</title>
+</head>
+
+<body>
+    <header>
+        <section class="name" template="title"></section>
+        <section class="contact">
+            <ul template="me"></ul>
+        </section>
+    </header>
+    <section class="content">
+        <section class="work">
+            <h2>PROFESSIONAL EXPERIENCE</h2>
+            <ul template="working"></ul>
+        </section>
+
+        <section class="project">
+            <h2>PROJECTS</h2>
+            <ul template="project"></ul>
+        </section>
+
+        <section class="education">
+            <h2>EDUCATION</h2>
+            <ul template="education"></ul>
+        </section>
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>
