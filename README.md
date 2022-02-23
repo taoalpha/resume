@@ -1,0 +1,1 @@
+The html contains the style and structure of the resume, the js contains all the info as a configuration. To generate a pdf resume, just open the html and print ;)
